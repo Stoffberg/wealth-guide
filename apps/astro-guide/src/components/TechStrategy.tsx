@@ -11,7 +11,7 @@ import {
 
 export default function TechStrategy() {
 	return (
-		<div className="mx-auto max-w-4xl px-8 py-12">
+		<div className="container-mobile">
 			{/* Header */}
 			<div className="mb-10">
 				<div className="mb-4 inline-flex items-center gap-2 rounded-full bg-purple-100 px-3 py-1.5 font-medium text-purple-700 text-sm">
@@ -101,9 +101,7 @@ export default function TechStrategy() {
 									3
 								</div>
 								<div>
-									<h4 className="mb-1 font-semibold text-green-800">
-										Pay R0
-									</h4>
+									<h4 className="mb-1 font-semibold text-green-800">Pay R0</h4>
 									<p className="text-green-700 text-sm">
 										If you meet the goals, Discovery refunds the full cost. You
 										pay upfront (typically R6,000-R12,000 depending on model),
@@ -167,9 +165,7 @@ export default function TechStrategy() {
 									<h4 className="mb-1 font-semibold text-slate-900">
 										Get the Ring
 									</h4>
-									<p className="mb-2 text-slate-600 text-sm">
-										Two options:
-									</p>
+									<p className="mb-2 text-slate-600 text-sm">Two options:</p>
 									<ul className="space-y-1 text-slate-600 text-sm">
 										<li className="flex items-start gap-2">
 											<span className="shrink-0 font-semibold">Option A:</span>
@@ -277,7 +273,7 @@ export default function TechStrategy() {
 						Apple Watch vs Oura Ring: Which One?
 					</h3>
 
-					<div className="grid gap-6 md:grid-cols-2">
+					<div className="grid-mobile grid-mobile-cols-2">
 						{/* Apple Watch Card */}
 						<div className="overflow-hidden rounded-xl border-2 border-slate-200">
 							<div className="flex items-center gap-3 bg-slate-900 p-4 text-white">
@@ -309,9 +305,7 @@ export default function TechStrategy() {
 											)}
 											<span
 												className={
-													item.check
-														? "text-slate-700"
-														: "text-slate-500"
+													item.check ? "text-slate-700" : "text-slate-500"
 												}
 											>
 												{item.text}
@@ -362,9 +356,7 @@ export default function TechStrategy() {
 											)}
 											<span
 												className={
-													item.check
-														? "text-slate-700"
-														: "text-slate-500"
+													item.check ? "text-slate-700" : "text-slate-500"
 												}
 											>
 												{item.text}

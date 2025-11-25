@@ -77,7 +77,7 @@ function BenefitCard({
 
 export default function PurpleBenefits() {
 	return (
-		<div className="mx-auto max-w-6xl px-8 py-12">
+		<div className="container-mobile max-w-6xl">
 			{/* Header */}
 			<div className="mb-10">
 				<div className="mb-4 inline-flex items-center gap-2 rounded-full bg-purple-100 px-3 py-1.5 font-medium text-purple-700 text-sm">
@@ -101,7 +101,7 @@ export default function PurpleBenefits() {
 					<h2 className="section-subheader">Premium Travel</h2>
 				</div>
 
-				<div className="grid gap-4 md:grid-cols-2">
+				<div className="grid-mobile grid-mobile-cols-2">
 					<BenefitCard
 						title="International Business Class Flights"
 						icon={Plane}
@@ -149,7 +149,7 @@ export default function PurpleBenefits() {
 					<h2 className="section-subheader">Technology & Home</h2>
 				</div>
 
-				<div className="grid gap-4 md:grid-cols-2">
+				<div className="grid-mobile grid-mobile-cols-2">
 					<BenefitCard
 						title="Apple Products (MacBook, iPad, iPhone)"
 						icon={Laptop}
@@ -184,7 +184,7 @@ export default function PurpleBenefits() {
 					<h2 className="section-subheader">Daily Essentials</h2>
 				</div>
 
-				<div className="grid gap-4 md:grid-cols-2">
+				<div className="grid-mobile grid-mobile-cols-2">
 					<BenefitCard
 						title="HealthyFood (Checkers & Woolworths)"
 						icon={ShoppingBag}
@@ -219,7 +219,7 @@ export default function PurpleBenefits() {
 					<h2 className="section-subheader">Fitness & Vitality</h2>
 				</div>
 
-				<div className="grid gap-4 md:grid-cols-2">
+				<div className="grid-mobile grid-mobile-cols-2">
 					<BenefitCard
 						title="Gym Memberships (Virgin Active, Planet Fitness)"
 						icon={Dumbbell}
@@ -244,7 +244,7 @@ export default function PurpleBenefits() {
 					<h2 className="section-subheader">Banking Power</h2>
 				</div>
 
-				<div className="grid gap-4 md:grid-cols-2">
+				<div className="grid-mobile grid-mobile-cols-2">
 					<BenefitCard
 						title="Dedicated Relationship Banker"
 						icon={Users}

@@ -60,7 +60,7 @@ export default function RewardsEstimator() {
 		`R${Math.round(value).toLocaleString()}`;
 
 	return (
-		<div className="mx-auto max-w-6xl px-8 py-12">
+		<div className="container-mobile max-w-6xl">
 			{/* Header */}
 			<div className="mb-10">
 				<div className="mb-4 inline-flex items-center gap-2 rounded-full bg-purple-100 px-3 py-1.5 font-medium text-purple-700 text-sm">
@@ -75,7 +75,7 @@ export default function RewardsEstimator() {
 				</p>
 			</div>
 
-			<div className="grid gap-8 lg:grid-cols-2">
+			<div className="grid gap-8 lg:grid-cols-2 xl:grid-cols-2">
 				{/* Input Form */}
 				<div className="space-y-6">
 					{/* Status Selection */}
@@ -84,7 +84,7 @@ export default function RewardsEstimator() {
 							<Sparkles className="h-5 w-5 text-purple-600" />
 							Your Status
 						</h3>
-						<div className="grid gap-4 sm:grid-cols-2">
+						<div className="grid-mobile grid-mobile-cols-2">
 							<div>
 								<label
 									className="mb-2 block font-medium text-slate-700 text-sm"
@@ -487,17 +487,13 @@ export default function RewardsEstimator() {
 							</div>
 							<div className="space-y-2 text-sm">
 								<div className="flex justify-between">
-									<span className="text-slate-600">
-										Annual Value
-									</span>
+									<span className="text-slate-600">Annual Value</span>
 									<span className="value-positive">
 										{formatCurrency(breakdown.totalAnnualValue)}
 									</span>
 								</div>
 								<div className="flex justify-between">
-									<span className="text-slate-600">
-										Annual Fees
-									</span>
+									<span className="text-slate-600">Annual Fees</span>
 									<span className="value-negative">
 										-
 										{formatCurrency(
@@ -506,9 +502,7 @@ export default function RewardsEstimator() {
 									</span>
 								</div>
 								<div className="flex justify-between border-slate-100 border-t pt-2 font-semibold">
-									<span className="text-slate-700">
-										Net Annual Profit
-									</span>
+									<span className="text-slate-700">Net Annual Profit</span>
 									<span
 										className={
 											breakdown.netAnnualProfit >= 0
@@ -582,11 +576,7 @@ function InputField({
 					className={`input ${prefix ? "pl-8" : Icon ? "pl-10" : ""}`}
 				/>
 			</div>
-			{hint && (
-				<p className="mt-1.5 text-slate-500 text-xs">
-					{hint}
-				</p>
-			)}
+			{hint && <p className="mt-1.5 text-slate-500 text-xs">{hint}</p>}
 		</div>
 	);
 }

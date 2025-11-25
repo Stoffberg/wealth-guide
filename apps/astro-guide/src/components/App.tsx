@@ -6,9 +6,11 @@ import {
 	CreditCard,
 	Heart,
 	LineChart,
+	Menu,
 	ShoppingCart,
 	Sparkles,
 	Target,
+	X,
 } from "lucide-react";
 import { useState } from "react";
 import FoodGuide from "./FoodGuide";
@@ -35,6 +37,7 @@ interface ModuleInfo {
 
 export default function App() {
 	const [currentModule, setCurrentModule] = useState<Module>("intro");
+	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
 	const modules: ModuleInfo[] = [
 		{
@@ -85,11 +88,47 @@ export default function App() {
 
 	return (
 		<div className="flex min-h-screen">
+			{/* Mobile Header */}
+			<header className="fixed top-0 right-0 left-0 z-50 border-slate-200/50 border-b bg-white/80 backdrop-blur-xl lg:hidden">
+				<div className="flex h-16 items-center justify-between px-4">
+					<div className="flex items-center gap-3">
+						<div className="flex h-8 w-8 items-center justify-center rounded-lg bg-purple-gradient">
+							<LineChart className="h-4 w-4 text-white" />
+						</div>
+						<h1 className="font-bold text-slate-900">Purple Guide</h1>
+					</div>
+					<button
+						type="button"
+						onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+						className="flex h-10 w-10 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100"
+					>
+						{mobileMenuOpen ? (
+							<X className="h-5 w-5" />
+						) : (
+							<Menu className="h-5 w-5" />
+						)}
+					</button>
+				</div>
+			</header>
+
+			{/* Mobile Menu Overlay */}
+			{mobileMenuOpen && (
+				<button
+					type="button"
+					className="fixed inset-0 z-40 bg-black/50 lg:hidden"
+					onClick={() => setMobileMenuOpen(false)}
+				/>
+			)}
+
 			{/* Sidebar */}
-			<aside className="glass fixed top-0 left-0 z-40 h-screen w-72 border-slate-200/50 border-r">
+			<aside
+				className={`glass fixed top-16 left-0 z-40 h-screen w-72 transform border-slate-200/50 border-r transition-transform duration-200 ease-in-out lg:top-0 ${
+					mobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+				} lg:translate-x-0`}
+			>
 				<div className="flex h-full flex-col">
 					{/* Logo */}
-					<div className="px-6 py-6">
+					<div className="hidden px-6 py-6 lg:block">
 						<div className="flex items-center gap-3">
 							<div className="flex h-10 w-10 items-center justify-center rounded-xl bg-purple-gradient">
 								<LineChart className="h-5 w-5 text-white" />
@@ -104,7 +143,7 @@ export default function App() {
 					</div>
 
 					{/* Progress indicator */}
-					<div className="px-6 pb-4">
+					<div className="px-6 pt-6 pb-4 lg:pt-0">
 						<div className="mb-2 flex items-center justify-between">
 							<span className="font-medium text-slate-500 text-xs">
 								Progress
@@ -135,7 +174,10 @@ export default function App() {
 									<button
 										type="button"
 										key={module.id}
-										onClick={() => setCurrentModule(module.id)}
+										onClick={() => {
+											setCurrentModule(module.id);
+											setMobileMenuOpen(false);
+										}}
 										className={`nav-item w-full text-left ${
 											isActive ? "nav-item-active" : ""
 										}`}
@@ -213,7 +255,7 @@ export default function App() {
 			</aside>
 
 			{/* Main Content */}
-			<main className="ml-72 flex-1">
+			<main className="ml-0 flex-1 pt-16 lg:ml-72 lg:pt-0">
 				<div className="animate-fade-in">
 					{currentModule === "intro" && <IntroSection />}
 					{currentModule === "philosophy" && <PhilosophySection />}
@@ -230,7 +272,7 @@ export default function App() {
 
 function IntroSection() {
 	return (
-		<div className="mx-auto max-w-4xl px-8 py-12">
+		<div className="container-mobile">
 			{/* Hero */}
 			<div className="mb-12">
 				<div className="mb-6 inline-flex items-center gap-2 rounded-full bg-purple-100 px-3 py-1.5 font-medium text-purple-700 text-sm">
@@ -248,7 +290,7 @@ function IntroSection() {
 			</div>
 
 			{/* Value prop cards */}
-			<div className="mb-12 grid gap-4 md:grid-cols-3">
+			<div className="grid-mobile grid-mobile-cols-3 mb-12">
 				{[
 					{
 						icon: Target,
@@ -336,7 +378,7 @@ function IntroSection() {
 
 function PhilosophySection() {
 	return (
-		<div className="mx-auto max-w-4xl px-8 py-12">
+		<div className="container-mobile">
 			<div className="mb-10">
 				<div className="mb-4 inline-flex items-center gap-2 rounded-full bg-purple-100 px-3 py-1.5 font-medium text-purple-700 text-sm">
 					<Compass className="h-4 w-4" />
@@ -356,7 +398,7 @@ function PhilosophySection() {
 					<p className="mb-6 text-slate-600">
 						South Africans have a financial health crisis:
 					</p>
-					<div className="grid gap-4 sm:grid-cols-2">
+					<div className="grid-mobile grid-mobile-cols-2">
 						{[
 							{ stat: "53%", label: "of people borrowed in 2017" },
 							{ stat: "24.3M", label: "credit-active consumers" },
@@ -489,7 +531,7 @@ function PhilosophySection() {
 
 function HealthSection() {
 	return (
-		<div className="mx-auto max-w-4xl px-8 py-12">
+		<div className="container-mobile">
 			<div className="mb-10">
 				<div className="mb-4 inline-flex items-center gap-2 rounded-full bg-purple-100 px-3 py-1.5 font-medium text-purple-700 text-sm">
 					<Heart className="h-4 w-4" />
@@ -507,7 +549,7 @@ function HealthSection() {
 					<p className="mb-6 text-slate-700">
 						Vitality Health status multiplies your Vitality Money rewards:
 					</p>
-					<div className="grid gap-4 sm:grid-cols-2">
+					<div className="grid-mobile grid-mobile-cols-2">
 						{[
 							{
 								label: "HealthyFood",
@@ -553,7 +595,7 @@ function HealthSection() {
 					<h2 className="section-subheader mb-4">
 						Status Thresholds (Per Calendar Year)
 					</h2>
-					<div className="overflow-x-auto">
+					<div className="table-mobile">
 						<table className="table">
 							<thead>
 								<tr>

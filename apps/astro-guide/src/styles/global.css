@@ -310,6 +310,46 @@ body {
   @apply text-xl font-semibold text-slate-800;
 }
 
+/* Mobile responsive utilities */
+.px-mobile {
+  @apply px-4 sm:px-6 lg:px-8;
+}
+
+.py-mobile {
+  @apply py-6 sm:py-8 lg:py-12;
+}
+
+.text-mobile {
+  @apply text-base sm:text-lg;
+}
+
+/* Mobile-first responsive containers */
+.container-mobile {
+  @apply mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12;
+}
+
+/* Mobile table wrapper */
+.table-mobile {
+  @apply overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0;
+}
+
+/* Mobile grid adjustments */
+.grid-mobile {
+  @apply grid gap-4;
+}
+
+.grid-mobile-cols-1 {
+  @apply grid-cols-1 sm:grid-cols-2 lg:grid-cols-3;
+}
+
+.grid-mobile-cols-2 {
+  @apply grid-cols-1 sm:grid-cols-2;
+}
+
+.grid-mobile-cols-3 {
+  @apply grid-cols-1 sm:grid-cols-2 lg:grid-cols-3;
+}
+
 /* Animated pulse for important items */
 @keyframes pulse-purple {
   0%, 100% {

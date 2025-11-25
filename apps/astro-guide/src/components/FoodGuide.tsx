@@ -255,7 +255,7 @@ export default function FoodGuide() {
 	const totalSavings = totalOriginal * (discount / 100);
 
 	return (
-		<div className="mx-auto max-w-4xl px-8 py-12">
+		<div className="container-mobile">
 			{/* Header */}
 			<div className="mb-8">
 				<div className="mb-4 inline-flex items-center gap-2 rounded-full bg-purple-100 px-3 py-1.5 font-medium text-purple-700 text-sm">
@@ -287,7 +287,7 @@ export default function FoodGuide() {
 
 			{/* Status Selectors & Discount Display */}
 			<div className="card mb-8 p-6">
-				<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+				<div className="grid-mobile grid-mobile-cols-3">
 					<div>
 						<label
 							className="mb-2 block font-medium text-slate-700 text-sm"
@@ -416,9 +416,7 @@ export default function FoodGuide() {
 											</span>
 										)}
 									</div>
-									<p className="text-slate-500 text-sm">
-										{item.size}
-									</p>
+									<p className="text-slate-500 text-sm">{item.size}</p>
 									<p className="mt-2 text-slate-600 text-sm italic">
 										{item.notes}
 									</p>
@@ -490,9 +488,7 @@ export default function FoodGuide() {
 								<p className="font-medium text-slate-900 text-sm">
 									{rule.title}
 								</p>
-								<p className="text-slate-600 text-xs">
-									{rule.desc}
-								</p>
+								<p className="text-slate-600 text-xs">{rule.desc}</p>
 							</div>
 						</div>
 					))}

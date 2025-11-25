@@ -33,7 +33,7 @@ export default function MoneyCalculator() {
 		`R${Math.round(value).toLocaleString()}`;
 
 	return (
-		<div className="mx-auto max-w-4xl px-8 py-12">
+		<div className="container-mobile">
 			{/* Header */}
 			<div className="mb-10">
 				<div className="mb-4 inline-flex items-center gap-2 rounded-full bg-purple-100 px-3 py-1.5 font-medium text-purple-700 text-sm">
@@ -77,7 +77,7 @@ export default function MoneyCalculator() {
 						</p>
 					</div>
 
-					<div className="mb-6 grid gap-4 sm:grid-cols-2">
+					<div className="grid-mobile grid-mobile-cols-2 mb-6">
 						<div>
 							<label
 								className="mb-2 block font-medium text-slate-700 text-sm"
@@ -131,9 +131,7 @@ export default function MoneyCalculator() {
 
 						<div>
 							<div className="mb-2 flex items-center justify-between">
-								<span className="text-slate-600 text-sm">
-									Progress
-								</span>
+								<span className="text-slate-600 text-sm">Progress</span>
 								<span className="font-medium text-sm">
 									{savingsProgress.toFixed(0)}%
 								</span>
@@ -166,9 +164,7 @@ export default function MoneyCalculator() {
 								</span>
 							</div>
 							<div className="text-right">
-								<div className="text-slate-500 text-xs">
-									Points Earned
-								</div>
+								<div className="text-slate-500 text-xs">Points Earned</div>
 								<div className="font-bold text-purple-600">
 									{savingsPoints.toLocaleString()} / 30,000
 								</div>
@@ -249,14 +245,10 @@ export default function MoneyCalculator() {
 						</div>
 
 						<div className="flex items-center justify-between">
-							<span className="text-slate-600 text-sm">
-								Your Repayment
-							</span>
+							<span className="text-slate-600 text-sm">Your Repayment</span>
 							<span
 								className={`font-semibold ${
-									debtRatio <= debtTarget
-										? "text-green-600"
-										: "text-red-600"
+									debtRatio <= debtTarget ? "text-green-600" : "text-red-600"
 								}`}
 							>
 								{formatCurrency(monthlyDebtRepayment)} ({debtRatio.toFixed(1)}%
@@ -273,18 +265,14 @@ export default function MoneyCalculator() {
 								)}
 								<span
 									className={
-										debtRatio <= debtTarget
-											? "text-green-600"
-											: "text-red-600"
+										debtRatio <= debtTarget ? "text-green-600" : "text-red-600"
 									}
 								>
 									{debtRatio <= debtTarget ? "On Track" : "Over Limit"}
 								</span>
 							</div>
 							<div className="text-right">
-								<div className="text-slate-500 text-xs">
-									Points Earned
-								</div>
+								<div className="text-slate-500 text-xs">Points Earned</div>
 								<div className="font-bold text-purple-600">
 									{debtPoints.toLocaleString()} / 30,000
 								</div>
@@ -378,9 +366,7 @@ export default function MoneyCalculator() {
 						)}
 
 						{behaviour.description && (
-							<p className="text-slate-600 text-sm">
-								{behaviour.description}
-							</p>
+							<p className="text-slate-600 text-sm">{behaviour.description}</p>
 						)}
 
 						{behaviour.note && (
