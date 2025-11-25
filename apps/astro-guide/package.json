@@ -1,0 +1,24 @@
+{
+	"name": "astro-guide",
+	"type": "module",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "astro dev --port 4001",
+		"build": "astro build",
+		"preview": "astro preview"
+	},
+	"dependencies": {
+		"@astrojs/react": "^4.2.0",
+		"astro": "^5.1.1",
+		"lucide-react": "^0.552.0",
+		"react": "^19.2.0",
+		"react-dom": "^19.2.0"
+	},
+	"devDependencies": {
+		"@tailwindcss/vite": "^4.1.7",
+		"@types/react": "^19.2.2",
+		"@types/react-dom": "^19.2.2",
+		"tailwindcss": "^4.1.7",
+		"typescript": "^5.9.3"
+	}
+}
