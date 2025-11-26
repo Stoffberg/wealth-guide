@@ -33,6 +33,7 @@ export interface RewardInputs {
 	// Miles
 	monthlyMilesEarned: number;
 	usesMilesDDay: boolean;
+	usesVirtualCard: boolean;
 }
 
 export interface RewardBreakdown {
@@ -57,6 +58,7 @@ export interface RewardBreakdown {
 	priorityFastTrackValue: number;
 	conciergeValue: number;
 	sportsGearSavings: number;
+	baseMilesValue: number;
 
 	// Total
 	totalMonthlyValue: number;

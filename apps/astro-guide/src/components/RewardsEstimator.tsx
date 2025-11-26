@@ -9,6 +9,7 @@ import {
 	Laptop,
 	Plane,
 	ShoppingBag,
+	Smartphone,
 	Sparkles,
 	TrendingDown,
 	TrendingUp,
@@ -52,6 +53,7 @@ export default function RewardsEstimator() {
 		loungeVisitsPerYear: 12,
 		monthlyMilesEarned: 5000,
 		usesMilesDDay: true,
+		usesVirtualCard: true,
 	});
 
 	const breakdown = calculateRewards(inputs);
@@ -176,6 +178,20 @@ export default function RewardsEstimator() {
 								prefix="R"
 								hint="Must spend ≥ R90k/month for international business class"
 							/>
+							<div className="rounded-lg border border-purple-200 bg-purple-50 p-4">
+								<CheckboxField
+									label="Use virtual card for all purchases"
+									icon={Smartphone}
+									checked={inputs.usesVirtualCard}
+									onChange={(checked) =>
+										setInputs({ ...inputs, usesVirtualCard: checked })
+									}
+								/>
+								<p className="mt-2 ml-7 text-purple-700 text-xs">
+									<strong>Critical:</strong> Virtual card earns up to 1 Mile per
+									R15 spent. Physical card only earns 1 Mile per R100.
+								</p>
+							</div>
 						</div>
 					</div>
 
@@ -351,6 +367,13 @@ export default function RewardsEstimator() {
 							</div>
 
 							{[
+								{
+									label: inputs.usesVirtualCard
+										? "Base Miles (virtual card)"
+										: "Base Miles (physical card)",
+									value: breakdown.baseMilesValue,
+									icon: inputs.usesVirtualCard ? Smartphone : CreditCard,
+								},
 								{
 									label: "HealthyFood (75% back)",
 									value: breakdown.healthyFoodSavings,
@@ -552,6 +575,25 @@ function InputField({
 	hint,
 	icon: Icon,
 }: InputFieldProps) {
+	const [localValue, setLocalValue] = useState(value.toString());
+	const [isFocused, setIsFocused] = useState(false);
+
+	const displayValue = isFocused ? localValue : value.toString();
+
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setLocalValue(e.target.value);
+		onChange(e.target.value === "" ? 0 : Number(e.target.value));
+	};
+
+	const handleFocus = () => {
+		setLocalValue(value === 0 ? "" : value.toString());
+		setIsFocused(true);
+	};
+
+	const handleBlur = () => {
+		setIsFocused(false);
+	};
+
 	return (
 		<div>
 			<label
@@ -571,8 +613,10 @@ function InputField({
 				)}
 				<input
 					type="number"
-					value={value}
-					onChange={(e) => onChange(Number(e.target.value))}
+					value={displayValue}
+					onChange={handleChange}
+					onFocus={handleFocus}
+					onBlur={handleBlur}
 					className={`input ${prefix ? "pl-8" : Icon ? "pl-10" : ""}`}
 				/>
 			</div>

@@ -9,6 +9,7 @@ const PRIORITY_FAST_TRACK_VALUE = 200; // Annual value
 const RELATIONSHIP_BANKER_VALUE = 500; // Monthly value
 const CONCIERGE_VALUE = 300; // Monthly value
 const VIRTUAL_CARDS_VALUE = 200; // Annual value (security & convenience)
+const MILE_VALUE_RANDS = 0.4; // Discovery Mile value when spent wisely
 
 export function calculateRewards(inputs: RewardInputs): RewardBreakdown {
 	const monthlyFees = MONTHLY_ACCOUNT_FEE;
@@ -112,6 +113,13 @@ export function calculateRewards(inputs: RewardInputs): RewardBreakdown {
 			? Math.min(inputs.monthlyCardSpend * 0.01, 250) // Assume 1% of spend, capped at R250/month
 			: 0;
 
+	// Base Discovery Miles: Virtual card earns up to 1 Mile per R15, Physical card earns 1 Mile per R100
+	const baseMilesValue = calculateBaseMilesValue(
+		inputs.monthlyCardSpend,
+		inputs.vitalityMoneyStatus,
+		inputs.usesVirtualCard,
+	);
+
 	// Service benefits (annual values amortized monthly)
 	const priorityFastTrackValue = PRIORITY_FAST_TRACK_VALUE / 12;
 	const relationshipBankerValue = RELATIONSHIP_BANKER_VALUE;
@@ -132,6 +140,7 @@ export function calculateRewards(inputs: RewardInputs): RewardBreakdown {
 		milesDDayValue +
 		dynamicInterestSavings +
 		sportsGearSavings +
+		baseMilesValue +
 		priorityFastTrackValue +
 		relationshipBankerValue +
 		conciergeValue +
@@ -161,6 +170,7 @@ export function calculateRewards(inputs: RewardInputs): RewardBreakdown {
 		priorityFastTrackValue,
 		conciergeValue,
 		sportsGearSavings,
+		baseMilesValue,
 		totalMonthlyValue,
 		totalAnnualValue,
 		netMonthlyProfit,
@@ -415,4 +425,31 @@ function getInternationalFlightDiscount(
 			: status === "Silver"
 				? 7.5
 				: 5;
+}
+
+function calculateBaseMilesValue(
+	monthlySpend: number,
+	moneyStatus: string,
+	usesVirtualCard: boolean,
+): number {
+	// Physical card: 1 Mile per R100 spent (flat rate regardless of status)
+	// Virtual card: up to 1 Mile per R15 spent (based on Vitality Money status)
+	const physicalCardRate = 100; // R100 per Mile
+
+	// Virtual card rates by Vitality Money status (Rands per Mile)
+	const virtualCardRates: Record<string, number> = {
+		Blue: 30,
+		Bronze: 25,
+		Silver: 20,
+		Gold: 17,
+		Diamond: 15,
+	};
+
+	const virtualCardRate = virtualCardRates[moneyStatus] || 30;
+
+	const milesEarned = usesVirtualCard
+		? monthlySpend / virtualCardRate
+		: monthlySpend / physicalCardRate;
+
+	return milesEarned * MILE_VALUE_RANDS;
 }

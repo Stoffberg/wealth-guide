@@ -9,12 +9,49 @@ import {
 	Target,
 	TrendingUp,
 } from "lucide-react";
-import { useState } from "react";
+import { type ChangeEvent, useState } from "react";
+
+function useNumericInput(initial: number) {
+	const [numValue, setNumValue] = useState(initial);
+	const [localValue, setLocalValue] = useState(initial.toString());
+	const [isFocused, setIsFocused] = useState(false);
+
+	const displayValue = isFocused ? localValue : numValue.toString();
+
+	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+		setLocalValue(e.target.value);
+		setNumValue(e.target.value === "" ? 0 : Number(e.target.value));
+	};
+
+	const handleFocus = () => {
+		setLocalValue(numValue === 0 ? "" : numValue.toString());
+		setIsFocused(true);
+	};
+
+	const handleBlur = () => {
+		setIsFocused(false);
+	};
+
+	return {
+		value: numValue,
+		displayValue,
+		inputProps: {
+			value: displayValue,
+			onChange: handleChange,
+			onFocus: handleFocus,
+			onBlur: handleBlur,
+		},
+	};
+}
 
 export default function MoneyCalculator() {
-	const [monthlyIncome, setMonthlyIncome] = useState(250000);
-	const [emergencySavings, setEmergencySavings] = useState(750000);
-	const [monthlyDebtRepayment, setMonthlyDebtRepayment] = useState(5000);
+	const monthlyIncomeInput = useNumericInput(250000);
+	const emergencySavingsInput = useNumericInput(750000);
+	const monthlyDebtRepaymentInput = useNumericInput(5000);
+
+	const monthlyIncome = monthlyIncomeInput.value;
+	const emergencySavings = emergencySavingsInput.value;
+	const monthlyDebtRepayment = monthlyDebtRepaymentInput.value;
 
 	const targetSavings = monthlyIncome * 3;
 	const savingsRatio = emergencySavings / targetSavings;
@@ -91,8 +128,7 @@ export default function MoneyCalculator() {
 								</span>
 								<input
 									type="number"
-									value={monthlyIncome}
-									onChange={(e) => setMonthlyIncome(Number(e.target.value))}
+									{...monthlyIncomeInput.inputProps}
 									className="input pl-8"
 								/>
 							</div>
@@ -110,8 +146,7 @@ export default function MoneyCalculator() {
 								</span>
 								<input
 									type="number"
-									value={emergencySavings}
-									onChange={(e) => setEmergencySavings(Number(e.target.value))}
+									{...emergencySavingsInput.inputProps}
 									className="input pl-8"
 								/>
 							</div>
@@ -224,10 +259,7 @@ export default function MoneyCalculator() {
 							</span>
 							<input
 								type="number"
-								value={monthlyDebtRepayment}
-								onChange={(e) =>
-									setMonthlyDebtRepayment(Number(e.target.value))
-								}
+								{...monthlyDebtRepaymentInput.inputProps}
 								className="input pl-8"
 							/>
 						</div>
